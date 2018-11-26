@@ -1,2 +1,2 @@
-# blog.alexdobjanschi.me
-Static contents of blog.alexdobjanschi.me
+# djalexd.github.io
+Static contents of djalexd.github.io
