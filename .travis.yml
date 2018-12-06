@@ -12,4 +12,18 @@ node_js:
 
 script:
   - npm install
-  - npm run lint
+
+branches:
+  except:
+  # because this is a github personal page, only master 
+  # is published. Thus, Travis musn't build from that!
+  - master
+
+jobs:
+  include:
+    - stage: test
+      script:
+        - npm run lint
+    - stage: deploy
+      script:
+        - npm run deploy
