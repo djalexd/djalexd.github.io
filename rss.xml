@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ramblings about technology, cloud & automation]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog/</link><generator>RSS for Node</generator><lastBuildDate>Thu, 06 Dec 2018 19:01:49 GMT</lastBuildDate><item><title><![CDATA[AWS Labs - text to audio]]></title><description><![CDATA[As part of the  AWS Labs  series, this blog post describes a simple, easy to implement and cost-effective, runtime that allows users to…]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog//aws-lab-text-to-audio/</link><guid isPermaLink="false">https://gatsbyjs.github.io/gatsby-starter-blog//aws-lab-text-to-audio/</guid><pubDate>Sun, 25 Nov 2018 12:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;As part of the &lt;strong&gt;AWS Labs&lt;/strong&gt; series, this blog post describes a simple, easy to implement and cost-effective, runtime that allows users to submit text and listen back to a converted sound file (.mp3)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://aws.amazon.com/polly/&quot;&gt;Polly&lt;/a&gt; is a &lt;a href=&quot;https://aws.amazon.com/about-aws/whats-new/2016/11/introducing-amazon-polly/&quot;&gt;recently introduced&lt;/a&gt; managed AWS service that performs text-to-speech. While new, it already supports dozens of voices (over 50!) and, like other AWS services, the interaction is performed through language-specific bindings/client.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;See this in action &lt;a href=&quot;https://aws.amazon.com/polly/&quot;&gt;demo&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Grab the source code &lt;a href=&quot;https://github.com/djalexd/aws-labs-text-to-audio&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3&gt;Getting started&lt;/h3&gt;
+&lt;p&gt;As already mentioned, this post is proof of concept for &lt;a href=&quot;https://aws.amazon.com/polly/&quot;&gt;Polly&lt;/a&gt;, “wrapped” with a couple of other components that make the whole flow simpler:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;basic UI to interact with&lt;/li&gt;
+&lt;li&gt;posts persistence using DynamoDB&lt;/li&gt;
+&lt;li&gt;API that &lt;em&gt;creates a post&lt;/em&gt; (POST) and &lt;em&gt;lists all posts&lt;/em&gt; (GET)&lt;/li&gt;
+&lt;li&gt;backend processor that gets notified via SNS&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The solution diagram is the following:&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-e7194.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block;  max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 74.07821229050279%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAAAsSAAALEgHS3X78AAAC20lEQVQ4y2M4e+6c8IuXL1kYoOB/VwHjdX8HRhh/Z5cZ45Xpvqwg9s85EUU/F8TPBrHVfLKZDMNqWf3a94PVanpmQjQADZx64OBBaxDb2syMHW6woTdDX7EW3GAQeDUtqvXF1MhtDGjg////CM6x48d19+7dKwzjL7LWt9vhbGYE42/pMlXd3GnqExJiBnIlLxDzg8RF7dJEtWP7apxLliqB+Nq++UxgDefOn489c/KkAoidqavOe8jD+u1OV4srTBoMYG+ubTXt3TXB8tu5uXZSYAv+/wdrFLSMdzEpXPMfaGAyiC+m5cDFzgqUOnX6dPmePXuMwaZ7hjAusDdNXeFoFg5z4cQCHdtFtYb5Xg5y3EAuMxCDLRI0i+HVimhNFil4xAcOU01NdjcPb0Zs4cAJ1ciwotkIJax+zons+Do3bi+ILSvJBTZ4U5Oq6snZ1oaIgH79mvH4sWNwfpaWMuv/6nRGhEX5DP+Pp4FTwdOJYXlPJoROBzIZBUQlgRHowrq5y+zohYWOLydNnsZz8NgFToat27YxbNy0iYGJEWIGJwcHa052NjPMxUycXJgxCeK/PArWsL6SU/rivglhZ86en37x4oVmBiyAhQEHOBlgL3zCz04OXbxcU5y3t7dHcMfOXVxwwcWLF4PpqVOncp05c8Z5xowZQiAHKoiLsWnw84DD64iH9Q5gCngPDGSuc2dPWa489Vjxdaejx4+FiX+v5ynrodjy8OFDMP3582fG8+fP80+bNg3sUi0pCcYCPXWw93a6W+VucbOaCArD21fOC174/59tR5aR5pm24Olb82ykMLz05MkTBjwAZCgfFDNjUzB/2hxEsjl06BCY3r9/P8O5c+cYpk+fDuZ7aaiiJC0Ivstgk9EHTuCKvpWWqmFtazQSZqgykAqUeLgYdAR4wWzdxKlgV+okTs21rNj+37hgnRcDJSD+ECQZCamaS2uGNXnImPkLgvgATkMBlwm8oLcAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;text to audio AWS architecture&quot;
+        title=&quot;&quot;
+        src=&quot;/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-fb8a0.png&quot;
+        srcset=&quot;/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-1a291.png 148w,
+/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-2bc4a.png 295w,
+/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-fb8a0.png 590w,
+/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-526de.png 885w,
+/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-e7194.png 895w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;h3&gt;Implementation details&lt;/h3&gt;
+&lt;p&gt;There are a couple of things happening in this diagram:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Users visit the site address, which in turn load static contents from an S3 bucket. The bucket is configured to &lt;a href=&quot;https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html&quot;&gt;host a static website&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;The Javascript client communicates with an API gateway (to retrieve all available posts or to publish a new one)&lt;/li&gt;
+&lt;li&gt;API gateway has a single endpoint &lt;code class=&quot;language-text&quot;&gt;/text-to-audio&lt;/code&gt; with 2 methods: &lt;code class=&quot;language-text&quot;&gt;GET&lt;/code&gt; (retrieve posts) and &lt;code class=&quot;language-text&quot;&gt;POST&lt;/code&gt; (submit a new post). Both methods are configured to invoke lambda functions that interact with a single DynamoDB table.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Since process (text-to-speech conversion) can take more than than API gateway timeout (&lt;em&gt;29 seconds&lt;/em&gt;), it’ advisable  to decouple frontend-related functionality from long-running tasks. Particularly here, create new posts &amp;#x26; converting text-to-speech&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&quot;4&quot;&gt;
+&lt;li&gt;All these messages are sent via SNS topic to an offline processor (lambda function). This is the moment when &lt;a href=&quot;https://aws.amazon.com/polly/&quot;&gt;Polly&lt;/a&gt; is called. The function actually performs slightly more than it should: convert, stream result body to S3 and update item in database. But alas, this is a demo! (&lt;small&gt;&lt;em&gt;hint: use step functions&lt;/em&gt;&lt;/small&gt;)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3&gt;Final thoughts&lt;/h3&gt;
+&lt;p&gt;This was a super fun lab where besides text-to-speech via Polly, I got to practice with ReactJS (barebones, no Redux). All the AWS resources are managed with Terraform code, so I don’t really have &lt;em&gt;to ever manually go into AWS account and configure anything&lt;/em&gt;!&lt;/p&gt;
+&lt;p&gt;But because this is merely a lab/demo, I simplified a couple of aspects:
+&lt;small&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;by far this is not a production environment: static website contents, as well as generated .mp3 files are &lt;em&gt;publicly accessible&lt;/em&gt;, without any authentication or credentials!&lt;/li&gt;
+&lt;li&gt;API gateway security is achieved using &lt;em&gt;api key&lt;/em&gt;, and while it’s easy to add more keys (e.g. one key per consumer), it also doesn’t scale beyond a handful of items. This is by far the easiest method to secure API access.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;No unit tests or integration tests!&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;No pipelines.&lt;/li&gt;
+&lt;li&gt;Everything is provisioned through &lt;em&gt;Terraform&lt;/em&gt;, but some resources’ lifecycle should be decoupled (e.g. UI static resources should not be deployed every time - unwanted side-effect because a &lt;a href=&quot;https://www.terraform.io/docs/provisioners/null_resource.html&quot;&gt;&lt;em&gt;null_resource&lt;/em&gt;&lt;/a&gt; is used)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/small&gt;
+&lt;h3&gt;Gotchas&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I particularly struggled with API Gateway CORS configuration, so be extra careful there! Perhaps a different integration method could be possible, but &lt;code class=&quot;language-text&quot;&gt;AWS_PROXY&lt;/code&gt; simply returns whatever is configured with lambda response. UI finally worked when I added &lt;code class=&quot;language-text&quot;&gt;Access-Control-Allow-Origin&lt;/code&gt; header in lambda response, as seen &lt;a href=&quot;https://github.com/djalexd/aws-labs-text-to-audio/blob/master/functions/http.py#L8&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;python&quot;&gt;&lt;pre class=&quot;language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token string&quot;&gt;&apos;statusCode&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token string&quot;&gt;&apos;body&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; payload&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;token string&quot;&gt;&apos;headers&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token string&quot;&gt;&apos;Access-Control-Allow-Origin&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;*&apos;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;Getting IAM roles is time consuming, but rewarding on the long-run (e.g. API gateway lambda invocation, lambda execution). &lt;em&gt;Make sure your roles allow enough permissions for necessary functionality, but nothing more!&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Always write unit tests!&lt;/em&gt; If for no better reason (code coverage, code complexity, static code analysis, BDD, etc etc etc), it simply felt that uploading &amp;#x26; manually testing functionality is too slow.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I hope you enjoyed this lab! See you next time!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Hello World]]></title><description><![CDATA[This is my first post on my new blog! How exciting! I’m sure I’ll write a lot more interesting things in the future.]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog//hello-world/</link><guid isPermaLink="false">https://gatsbyjs.github.io/gatsby-starter-blog//hello-world/</guid><pubDate>Wed, 21 Nov 2018 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;This is my first post on my new blog! How exciting!&lt;/p&gt;
+&lt;p&gt;I’m sure I’ll write a lot more interesting things in the future.&lt;/p&gt;</content:encoded></item></channel></rss>
