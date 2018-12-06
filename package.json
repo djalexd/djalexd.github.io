@@ -57,8 +57,7 @@
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.md'",
     "develop": "gatsby develop",
     "start": "npm run develop",
-    "build": "gatsby build",
-    "deploy": "gatsby build --prefix-paths && cp CNAME public/ && gh-pages -d public -b master",
+    "build": "gatsby build --prefix-paths && cp CNAME public/",
     "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix gatsby-node.js"
   }
 }

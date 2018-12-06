@@ -7,19 +7,24 @@ os:
   - linux
 node_js:
   - "8"
-#script:
-#  - npm install
 branches:
   except:
   # because this is a github personal page, only master 
   # is published. Thus, Travis musn't build from that!
   - master
-
 jobs:
   include:
     - stage: test
       script:
         - npm run lint
     - stage: deploy
-      script:
-        - npm run deploy
+      script: npm run build
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        keep-history: true
+        target-branch: master
+        local-dir: public
+        on:
+          branch: temporary-track
