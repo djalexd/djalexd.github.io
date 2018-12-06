@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ramblings about technology, cloud & automation]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog/</link><generator>RSS for Node</generator><lastBuildDate>Thu, 06 Dec 2018 19:04:04 GMT</lastBuildDate><item><title><![CDATA[AWS Labs - text to audio]]></title><description><![CDATA[As part of the  AWS Labs  series, this blog post describes a simple, easy to implement and cost-effective, runtime that allows users to…]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog//aws-lab-text-to-audio/</link><guid isPermaLink="false">https://gatsbyjs.github.io/gatsby-starter-blog//aws-lab-text-to-audio/</guid><pubDate>Sun, 25 Nov 2018 12:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ramblings about technology, cloud & automation]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog/</link><generator>RSS for Node</generator><lastBuildDate>Thu, 06 Dec 2018 20:31:59 GMT</lastBuildDate><item><title><![CDATA[AWS Labs - text to audio]]></title><description><![CDATA[As part of the  AWS Labs  series, this blog post describes a simple, easy to implement and cost-effective, runtime that allows users to…]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog//aws-lab-text-to-audio/</link><guid isPermaLink="false">https://gatsbyjs.github.io/gatsby-starter-blog//aws-lab-text-to-audio/</guid><pubDate>Sun, 25 Nov 2018 12:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
 &lt;p&gt;As part of the &lt;strong&gt;AWS Labs&lt;/strong&gt; series, this blog post describes a simple, easy to implement and cost-effective, runtime that allows users to submit text and listen back to a converted sound file (.mp3)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;a href=&quot;https://aws.amazon.com/polly/&quot;&gt;Polly&lt;/a&gt; is a &lt;a href=&quot;https://aws.amazon.com/about-aws/whats-new/2016/11/introducing-amazon-polly/&quot;&gt;recently introduced&lt;/a&gt; managed AWS service that performs text-to-speech. While new, it already supports dozens of voices (over 50!) and, like other AWS services, the interaction is performed through language-specific bindings/client.&lt;/p&gt;
@@ -20,7 +20,7 @@
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-e7194.png&quot;
+    href=&quot;/static/f3251c432cb662d589ee60268066f01b/e7194/text-to-audio-architecture.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -39,12 +39,12 @@
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;text to audio AWS architecture&quot;
         title=&quot;&quot;
-        src=&quot;/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-fb8a0.png&quot;
-        srcset=&quot;/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-1a291.png 148w,
-/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-2bc4a.png 295w,
-/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-fb8a0.png 590w,
-/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-526de.png 885w,
-/static/text-to-audio-architecture-f3251c432cb662d589ee60268066f01b-e7194.png 895w&quot;
+        src=&quot;/static/f3251c432cb662d589ee60268066f01b/fb8a0/text-to-audio-architecture.png&quot;
+        srcset=&quot;/static/f3251c432cb662d589ee60268066f01b/1a291/text-to-audio-architecture.png 148w,
+/static/f3251c432cb662d589ee60268066f01b/2bc4a/text-to-audio-architecture.png 295w,
+/static/f3251c432cb662d589ee60268066f01b/fb8a0/text-to-audio-architecture.png 590w,
+/static/f3251c432cb662d589ee60268066f01b/526de/text-to-audio-architecture.png 885w,
+/static/f3251c432cb662d589ee60268066f01b/e7194/text-to-audio-architecture.png 895w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
       /&gt;
     &lt;/span&gt;
