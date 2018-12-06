@@ -1,18 +1,14 @@
 language: node_js
-
+stages:
+  - test
+  - name: deploy
+    if: branch = temporary-track
 os:
   - linux
-  - osx
-
 node_js:
-  - "node"
-  - "lts/*"
-  - "7"
   - "8"
-
-script:
-  - npm install
-
+#script:
+#  - npm install
 branches:
   except:
   # because this is a github personal page, only master 
