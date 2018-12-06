@@ -4,7 +4,7 @@ import React from 'react'
 import 'typeface-montserrat'
 import 'typeface-merriweather'
 
-import profilePic from './profile-pic.png'
+import profilePic from './profile-pic.jpg'
 import { rhythm } from '../utils/typography'
 
 class Bio extends React.Component {
@@ -28,8 +28,8 @@ class Bio extends React.Component {
         />
         <p>
           Written by <strong>Alex Dobjanschi</strong> who lives and works in Berlin building useful things.{' '}
-          <a href="https://linkedin.com/in/alexdobjanschi/">
-            Come say hi on Linkedin
+          <a href="https://twitter.com/kylemathews">
+            You should follow him on Twitter
           </a>
         </p>
       </div>

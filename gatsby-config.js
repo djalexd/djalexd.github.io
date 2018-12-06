@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Ramblings about technology, cloud & automation',
+    title: 'Ramblings about technology & cloud',
     author: 'Alex Dobjanschi',
     description: 'A starter blog demonstrating what Gatsby can do.',
     siteUrl: 'https://gatsbyjs.github.io/gatsby-starter-blog/',
