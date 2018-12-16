@@ -3,9 +3,9 @@ title: AWS Labs - text to audio
 date: "2018-11-25T12:00:00.000Z"
 ---
 
-> As part of the **AWS Labs** series, this blog post describes a simple, easy to implement and cost-effective, runtime that allows users to submit text and listen back to a converted sound file (.mp3)
+> As part of the **AWS Labs** series, this blog post describes a simple, easy to implement and cost-effective service that allows users to submit text and listen back to a converted sound file (.mp3)
 
-[Polly](https://aws.amazon.com/polly/) is a [recently introduced](https://aws.amazon.com/about-aws/whats-new/2016/11/introducing-amazon-polly/) managed AWS service that performs text-to-speech. While new, it already supports dozens of voices (over 50!) and, like other AWS services, the interaction is performed through language-specific bindings/client.
+[Polly](https://aws.amazon.com/polly/) is a [recently introduced](https://aws.amazon.com/about-aws/whats-new/2016/11/introducing-amazon-polly/) managed AWS service that performs text-to-speech. While new, it already supports dozens of voices (over 50!) and, like other AWS services, the interaction is managed through language-specific bindings/client (the famous [AWS SDK](https://aws.amazon.com/getting-started/tools-sdks))
 
 > See this in action [demo](http://labs.alexdobjanschi.me/text-to-audio/)
 (<small>Drop me a PM for API access key</small>)
@@ -18,7 +18,7 @@ As already mentioned, this post is proof of concept for [Polly](https://aws.amaz
 * basic UI to interact with
 * posts persistence using DynamoDB
 * API that _creates a post_ (POST) and _lists all posts_ (GET)
-* backend processor that gets notified via SNS
+* backend processor that gets notified via [SNS](https://aws.amazon.com/sns)
 
 The solution diagram is the following:
 
@@ -40,12 +40,12 @@ There are a couple of things happening in this diagram:
 
 This was a super fun lab where besides text-to-speech via Polly, I got to practice with ReactJS (barebones, no Redux). All the AWS resources are managed with Terraform code, so I don't really have _to ever manually go into AWS account and configure anything_!
 
-But because this is merely a lab/demo, I simplified a couple of aspects:
+But, because this is merely a lab/demo, I simplified a couple of aspects:
 <small>
-* by far this is not a production environment: static website contents, as well as generated .mp3 files are _publicly accessible_, without any authentication or credentials!
-* API gateway security is achieved using _api key_, and while it's easy to add more keys (e.g. one key per consumer), it also doesn't scale beyond a handful of items. This is by far the easiest method to secure API access.
+* by far this is not a production environment: static website contents, as well as generated .mp3 files are _publicly accessible_ without any authentication or credentials!
+* API gateway security is achieved using _api key_ and while it's easy to add more keys (e.g. one key per consumer), it also doesn't scale beyond a handful of items. This is by far the easiest method to secure API access.
 * _No unit tests or integration tests!_
-* No pipelines.
+* No CI/CD pipelines.
 * Everything is provisioned through _Terraform_, but some resources' lifecycle should be decoupled (e.g. UI static resources should not be deployed every time - unwanted side-effect because a [*null_resource*](https://www.terraform.io/docs/provisioners/null_resource.html) is used)
 
 </small>
@@ -63,6 +63,6 @@ But because this is merely a lab/demo, I simplified a couple of aspects:
   }
 ```
 * Getting IAM roles is time consuming, but rewarding on the long-run (e.g. API gateway lambda invocation, lambda execution). _Make sure your roles allow enough permissions for necessary functionality, but nothing more!_
-* _Always write unit tests!_ If for no better reason (code coverage, code complexity, static code analysis, BDD, etc etc etc), it simply felt that uploading & manually testing functionality is too slow.
+* _Always write unit tests!_ If for no better reason (code coverage, code complexity, static code analysis, BDD, etc etc etc), it simply felt that uploading & manually testing functionality is too slow. I estimated to have lost about 3 hours of debugging (compile, zip, upload, test ... repeat) on simple things like undefined variables, wrong number of parameters, etc. Linting would also help a lot!
 
 I hope you enjoyed this lab! See you next time!
