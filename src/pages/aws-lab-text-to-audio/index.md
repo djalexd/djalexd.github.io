@@ -7,7 +7,8 @@ date: "2018-11-25T12:00:00.000Z"
 
 [Polly](https://aws.amazon.com/polly/) is a [recently introduced](https://aws.amazon.com/about-aws/whats-new/2016/11/introducing-amazon-polly/) managed AWS service that performs text-to-speech. While new, it already supports dozens of voices (over 50!) and, like other AWS services, the interaction is performed through language-specific bindings/client.
 
-> See this in action [demo](https://aws.amazon.com/polly/)
+> See this in action [demo](http://labs.alexdobjanschi.me/text-to-audio/)
+(<small>Drop me a PM for API access key</small>)
 
 > Grab the source code [here](https://github.com/djalexd/aws-labs-text-to-audio)
 
