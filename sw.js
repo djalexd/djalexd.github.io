@@ -26,26 +26,26 @@ workbox.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-1d43a09319a706989e7e.js"
+    "url": "webpack-runtime-a6985620b59e8ea25242.js"
   },
   {
     "url": "app.a2f933b7ab5f58f2ecfb.css"
   },
   {
-    "url": "app-00089f590797535543a8.js"
+    "url": "app-040522c78e7c050bba75.js"
   },
   {
-    "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-4d4bcd291f12d1934bd4.js"
+    "url": "component---node-modules-gatsby-plugin-offline-app-shell-js-5f55fdb53f5a7621b195.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "9df9adbeb16c54f58f076e04674120fb"
+    "revision": "343f3bafb11c2877bea62c3e9b525060"
   },
   {
-    "url": "component---src-pages-404-js-c5c51b74b4684f885181.js"
+    "url": "component---src-pages-404-js-df7aa23663ab04279987.js"
   },
   {
-    "url": "0-a4e63ba057dd810fa265.js"
+    "url": "0-a875e7320caf5ebc8f68.js"
   },
   {
     "url": "static/d/164/path---404-html-516-62a-NZuapzHg3X9TaN1iIixfv1W23E.json",
@@ -88,6 +88,24 @@ var navigationRoute = new workbox.routing.NavigationRoute(function (_ref) {
       var cacheName = workbox.core.cacheNames.precache;
       return caches.match(offlineShell, {
         cacheName: cacheName
+      }).then(function (cachedResponse) {
+        if (!cachedResponse) {
+          return fetch(offlineShell).then(function (response) {
+            if (response.ok) {
+              return caches.open(cacheName).then(function (cache) {
+                return (// Clone is needed because put() consumes the response body.
+                  cache.put(offlineShell, response.clone()).then(function () {
+                    return response;
+                  })
+                );
+              });
+            } else {
+              return fetch(event.request);
+            }
+          });
+        }
+
+        return cachedResponse;
       });
     }
 
