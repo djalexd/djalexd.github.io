@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ramblings about technology, cloud & automation]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog/</link><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Dec 2018 13:32:10 GMT</lastBuildDate><item><title><![CDATA[AWS Labs - text to audio]]></title><description><![CDATA[As part of the  AWS Labs  series, this blog post describes a simple, easy to implement and cost-effective, runtime that allows users to…]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog//aws-lab-text-to-audio/</link><guid isPermaLink="false">https://gatsbyjs.github.io/gatsby-starter-blog//aws-lab-text-to-audio/</guid><pubDate>Sun, 25 Nov 2018 12:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
-&lt;p&gt;As part of the &lt;strong&gt;AWS Labs&lt;/strong&gt; series, this blog post describes a simple, easy to implement and cost-effective, runtime that allows users to submit text and listen back to a converted sound file (.mp3)&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Ramblings about technology, cloud & automation]]></title><description><![CDATA[A starter blog demonstrating what Gatsby can do.]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog/</link><generator>RSS for Node</generator><lastBuildDate>Sun, 16 Dec 2018 20:00:17 GMT</lastBuildDate><item><title><![CDATA[AWS Labs - text to audio]]></title><description><![CDATA[As part of the  AWS Labs  series, this blog post describes a simple, easy to implement and cost-effective service that allows users to…]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog//aws-lab-text-to-audio/</link><guid isPermaLink="false">https://gatsbyjs.github.io/gatsby-starter-blog//aws-lab-text-to-audio/</guid><pubDate>Sun, 25 Nov 2018 12:00:00 GMT</pubDate><content:encoded>&lt;blockquote&gt;
+&lt;p&gt;As part of the &lt;strong&gt;AWS Labs&lt;/strong&gt; series, this blog post describes a simple, easy to implement and cost-effective service that allows users to submit text and listen back to a converted sound file (.mp3)&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://aws.amazon.com/polly/&quot;&gt;Polly&lt;/a&gt; is a &lt;a href=&quot;https://aws.amazon.com/about-aws/whats-new/2016/11/introducing-amazon-polly/&quot;&gt;recently introduced&lt;/a&gt; managed AWS service that performs text-to-speech. While new, it already supports dozens of voices (over 50!) and, like other AWS services, the interaction is performed through language-specific bindings/client.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://aws.amazon.com/polly/&quot;&gt;Polly&lt;/a&gt; is a &lt;a href=&quot;https://aws.amazon.com/about-aws/whats-new/2016/11/introducing-amazon-polly/&quot;&gt;recently introduced&lt;/a&gt; managed AWS service that performs text-to-speech. While new, it already supports dozens of voices (over 50!) and, like other AWS services, the interaction is managed through language-specific bindings/client (the famous &lt;a href=&quot;https://aws.amazon.com/getting-started/tools-sdks&quot;&gt;AWS SDK&lt;/a&gt;)&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;See this in action &lt;a href=&quot;http://labs.alexdobjanschi.me/text-to-audio/&quot;&gt;demo&lt;/a&gt;
 (&lt;small&gt;Drop me a PM for API access key&lt;/small&gt;)&lt;/p&gt;
@@ -15,7 +15,7 @@
 &lt;li&gt;basic UI to interact with&lt;/li&gt;
 &lt;li&gt;posts persistence using DynamoDB&lt;/li&gt;
 &lt;li&gt;API that &lt;em&gt;creates a post&lt;/em&gt; (POST) and &lt;em&gt;lists all posts&lt;/em&gt; (GET)&lt;/li&gt;
-&lt;li&gt;backend processor that gets notified via SNS&lt;/li&gt;
+&lt;li&gt;backend processor that gets notified via &lt;a href=&quot;https://aws.amazon.com/sns&quot;&gt;SNS&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;The solution diagram is the following:&lt;/p&gt;
 &lt;p&gt;
@@ -68,13 +68,13 @@
 &lt;/ol&gt;
 &lt;h3&gt;Final thoughts&lt;/h3&gt;
 &lt;p&gt;This was a super fun lab where besides text-to-speech via Polly, I got to practice with ReactJS (barebones, no Redux). All the AWS resources are managed with Terraform code, so I don’t really have &lt;em&gt;to ever manually go into AWS account and configure anything&lt;/em&gt;!&lt;/p&gt;
-&lt;p&gt;But because this is merely a lab/demo, I simplified a couple of aspects:
+&lt;p&gt;But, because this is merely a lab/demo, I simplified a couple of aspects:
 &lt;small&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;by far this is not a production environment: static website contents, as well as generated .mp3 files are &lt;em&gt;publicly accessible&lt;/em&gt;, without any authentication or credentials!&lt;/li&gt;
-&lt;li&gt;API gateway security is achieved using &lt;em&gt;api key&lt;/em&gt;, and while it’s easy to add more keys (e.g. one key per consumer), it also doesn’t scale beyond a handful of items. This is by far the easiest method to secure API access.&lt;/li&gt;
+&lt;li&gt;by far this is not a production environment: static website contents, as well as generated .mp3 files are &lt;em&gt;publicly accessible&lt;/em&gt; without any authentication or credentials!&lt;/li&gt;
+&lt;li&gt;API gateway security is achieved using &lt;em&gt;api key&lt;/em&gt; and while it’s easy to add more keys (e.g. one key per consumer), it also doesn’t scale beyond a handful of items. This is by far the easiest method to secure API access.&lt;/li&gt;
 &lt;li&gt;&lt;em&gt;No unit tests or integration tests!&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;No pipelines.&lt;/li&gt;
+&lt;li&gt;No CI/CD pipelines.&lt;/li&gt;
 &lt;li&gt;Everything is provisioned through &lt;em&gt;Terraform&lt;/em&gt;, but some resources’ lifecycle should be decoupled (e.g. UI static resources should not be deployed every time - unwanted side-effect because a &lt;a href=&quot;https://www.terraform.io/docs/provisioners/null_resource.html&quot;&gt;&lt;em&gt;null_resource&lt;/em&gt;&lt;/a&gt; is used)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/small&gt;
@@ -91,7 +91,7 @@
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
 &lt;li&gt;Getting IAM roles is time consuming, but rewarding on the long-run (e.g. API gateway lambda invocation, lambda execution). &lt;em&gt;Make sure your roles allow enough permissions for necessary functionality, but nothing more!&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;Always write unit tests!&lt;/em&gt; If for no better reason (code coverage, code complexity, static code analysis, BDD, etc etc etc), it simply felt that uploading &amp;#x26; manually testing functionality is too slow.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Always write unit tests!&lt;/em&gt; If for no better reason (code coverage, code complexity, static code analysis, BDD, etc etc etc), it simply felt that uploading &amp;#x26; manually testing functionality is too slow. I estimated to have lost about 3 hours of debugging (compile, zip, upload, test … repeat) on simple things like undefined variables, wrong number of parameters, etc. Linting would also help a lot!&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;I hope you enjoyed this lab! See you next time!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Hello World]]></title><description><![CDATA[This is my first post on my new blog! How exciting! I’m sure I’ll write a lot more interesting things in the future.]]></description><link>https://gatsbyjs.github.io/gatsby-starter-blog//hello-world/</link><guid isPermaLink="false">https://gatsbyjs.github.io/gatsby-starter-blog//hello-world/</guid><pubDate>Wed, 21 Nov 2018 22:12:03 GMT</pubDate><content:encoded>&lt;p&gt;This is my first post on my new blog! How exciting!&lt;/p&gt;
 &lt;p&gt;I’m sure I’ll write a lot more interesting things in the future.&lt;/p&gt;</content:encoded></item></channel></rss>
